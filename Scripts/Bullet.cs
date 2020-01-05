@@ -31,6 +31,8 @@ public class Bullet : MonoBehaviour
                 break;
             case "Barriar":
                 break;
+            case "Enemy":
+                break;
             default:
                 break;
         }
