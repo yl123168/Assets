@@ -19,11 +19,21 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        switch (collision.tag) {
+            case  "Wall":
+                break;
+            case "Grass":
+                break;
+            case "Heart":
+                break;
+            case "Barriar":
+                break;
+            default:
+                break;
+        }
     }
 
     private void BulletMove() {
         this.transform.Translate(this.transform.up*bulletSpeed*Time.deltaTime,Space.World);
     }
-
 }
