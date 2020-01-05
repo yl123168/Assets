@@ -9,19 +9,42 @@ public class Player : MonoBehaviour
 {
     private float horizon;
     private float vertical;
+    /// <summary>
+    /// 坦克运动速度
+    /// </summary>
     public float moveSpeed = 5;
     private SpriteRenderer sr;
+    /// <summary>
+    /// 玩家坦克四个方向图片
+    /// </summary>
     public Sprite[] tankAnim;//up right down left
+    /// <summary>
+    /// 子弹预制件
+    /// </summary>
+    public GameObject bulletPrefab;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
     }
 
+    private void Update()
+    {
+        Attack();
+    }
+
     private void FixedUpdate()
     {
         TankMovement();
     }
+
+    /// <summary>
+    /// 玩家发射子弹攻击
+    /// </summary>
+    private void Attack() {
+        Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
+    }
+
 
     /// <summary>
     /// 坦克运动
