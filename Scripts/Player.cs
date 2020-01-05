@@ -28,20 +28,37 @@ public class Player : MonoBehaviour
     public float timeCount = 1f;
 
     public GameObject ExplosionEffectPrefab;
+    public  GameObject ShieldEffect;
+    private bool IsShield;
+    public float shieldTime = 3;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        IsShield = true;
     }
 
     private void Update()
     {
+        CheckShield();
         Attack();
     }
 
     private void FixedUpdate()
     {
         TankMovement();
+    }
+
+    private void CheckShield() {
+        //如果没有护盾不要检查了
+        if (IsShield == false) return;
+        //如果护盾时间为0护盾时效
+        if (shieldTime <= 0) {
+            IsShield = false;
+            ShieldEffect.SetActive(false);
+        }
+        //护盾时间减少
+        shieldTime -= Time.deltaTime;
     }
 
     /// <summary>
@@ -92,6 +109,8 @@ public class Player : MonoBehaviour
     }
 
     public void Death() {
+        //无敌不死
+        if (IsShield) return;
         //产生爆炸特效
         Instantiate(ExplosionEffectPrefab, this.transform.position, this.transform.rotation);
         //死亡
