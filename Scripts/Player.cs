@@ -21,8 +21,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        horizon = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        horizon = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
         if (horizon != 0 || vertical != 0)
         {
             TankMovement();
@@ -36,9 +36,9 @@ public class Player : MonoBehaviour
     private void TankAnim()
     {
         if (horizon < 0) sr.sprite = tankAnim[3];
-        else sr.sprite = tankAnim[1];
+            else if(horizon>0) sr.sprite = tankAnim[1];
         if (vertical < 0) sr.sprite = tankAnim[2];
-        else sr.sprite = tankAnim[0];
+            else if(vertical >0 ) sr.sprite = tankAnim[0];
     }
 
     /// <summary>
