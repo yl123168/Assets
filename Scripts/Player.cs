@@ -39,10 +39,13 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// 玩家发射子弹攻击
+    /// 玩家按空格键发射子弹攻击
     /// </summary>
     private void Attack() {
-        Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
+        }
     }
 
 
