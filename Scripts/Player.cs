@@ -18,8 +18,7 @@ public class Player : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-
-    private void Update()
+    private void FixedUpdate()
     {
         horizon = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
@@ -46,6 +45,6 @@ public class Player : MonoBehaviour
     /// </summary>
     private void TankMovement()
     {
-        this.transform.Translate(horizon * moveSpeed * Time.deltaTime, vertical * moveSpeed * Time.deltaTime, 0, Space.World);
+        this.transform.Translate(horizon * moveSpeed * Time.fixedDeltaTime, vertical * moveSpeed * Time.fixedDeltaTime, 0, Space.World);
     }
 }
