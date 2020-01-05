@@ -20,24 +20,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        horizon = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-        if (horizon != 0 || vertical != 0)
-        {
-            TankMovement();
-            TankAnim();
-        }
-    }
-
-    /// <summary>
-    /// 坦克根据移动方向变换sprite
-    /// </summary>
-    private void TankAnim()
-    {
-        if (horizon < 0) sr.sprite = tankAnim[3];
-            else if(horizon>0) sr.sprite = tankAnim[1];
-        if (vertical < 0) sr.sprite = tankAnim[2];
-            else if(vertical >0 ) sr.sprite = tankAnim[0];
+        TankMovement();
     }
 
     /// <summary>
@@ -45,6 +28,28 @@ public class Player : MonoBehaviour
     /// </summary>
     private void TankMovement()
     {
-        this.transform.Translate(horizon * moveSpeed * Time.fixedDeltaTime, vertical * moveSpeed * Time.fixedDeltaTime, 0, Space.World);
+        horizon = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+        if (horizon != 0 || vertical != 0)
+        {
+            if (horizon != 0) vertical = 0;
+            if (horizon < 0)
+            {
+                sr.sprite = tankAnim[3];
+            }
+            else if (horizon > 0)
+            {
+                sr.sprite = tankAnim[1];
+            }
+            if (vertical < 0)
+            {
+                sr.sprite = tankAnim[2];
+            }
+            else if (vertical > 0)
+            {
+                sr.sprite = tankAnim[0];
+            }
+            this.transform.Translate(horizon * moveSpeed * Time.fixedDeltaTime, vertical * moveSpeed * Time.fixedDeltaTime, 0, Space.World);
+        }
     }
 }
