@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     public GameObject bulletPrefab;
     public Vector3 bulletAngel;
 
+    public float attackDelayTime = 1f;
+    private float timeCount;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        
         Attack();
     }
 
@@ -43,10 +47,12 @@ public class Player : MonoBehaviour
     /// 玩家按空格键发射子弹攻击
     /// </summary>
     private void Attack() {
-        if (Input.GetKeyDown(KeyCode.Space))
+        timeCount += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space) && timeCount>=attackDelayTime)
         {
             //子弹产生的角度：当前坦克的角度+子弹应该旋转的角度
             Instantiate(bulletPrefab, this.transform.position, Quaternion.Euler(bulletAngel));
+            timeCount = 0;
         }
     }
 
