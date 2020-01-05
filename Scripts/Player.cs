@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public Vector3 bulletAngel;
 
     public float attackDelayTime = 1f;
-    private float timeCount;
+    public float timeCount = 1f;
 
     private void Awake()
     {
