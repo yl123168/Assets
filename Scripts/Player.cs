@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     /// 子弹预制件
     /// </summary>
     public GameObject bulletPrefab;
+    public Vector3 bulletAngel;
 
     private void Awake()
     {
@@ -42,9 +43,10 @@ public class Player : MonoBehaviour
     /// 玩家按空格键发射子弹攻击
     /// </summary>
     private void Attack() {
+        bulletAngel = new Vector3(horizon, vertical, 0);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
+            Instantiate(bulletPrefab, this.transform.position, Quaternion.LookRotation(bulletAngel));
         }
     }
 
