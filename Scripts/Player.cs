@@ -10,6 +10,14 @@ public class Player : MonoBehaviour
     private float horizon;
     private float vertical;
     public float moveSpeed=5;
+    private SpriteRenderer sr;
+    public Sprite[] tankAnim;
+
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
+
 
     private void Update()
     {
