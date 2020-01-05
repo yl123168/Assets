@@ -43,10 +43,10 @@ public class Player : MonoBehaviour
     /// 玩家按空格键发射子弹攻击
     /// </summary>
     private void Attack() {
-        bulletAngel = new Vector3(horizon, vertical, 0);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(bulletPrefab, this.transform.position, Quaternion.LookRotation(bulletAngel));
+            //子弹产生的角度：当前坦克的角度+子弹应该旋转的角度
+            Instantiate(bulletPrefab, this.transform.position, Quaternion.Euler(bulletAngel));
         }
     }
 
@@ -64,18 +64,22 @@ public class Player : MonoBehaviour
             if (horizon < 0)
             {
                 sr.sprite = tankAnim[3];
+                bulletAngel = new Vector3(0, 0, 90);
             }
             else if (horizon > 0)
             {
                 sr.sprite = tankAnim[1];
+                bulletAngel = new Vector3(0, 0, -90);
             }
             if (vertical < 0)
             {
                 sr.sprite = tankAnim[2];
+                bulletAngel = new Vector3(0, 0, 180);
             }
             else if (vertical > 0)
             {
                 sr.sprite = tankAnim[0];
+                bulletAngel = new Vector3(0, 0, 0);
             }
             this.transform.Translate(horizon * moveSpeed * Time.fixedDeltaTime, vertical * moveSpeed * Time.fixedDeltaTime, 0, Space.World);
         }
