@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     public float attackDelayTime = 1f;
     public float timeCount = 1f;
 
+    public GameObject ExplosionEffectPrefab;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -34,7 +36,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        
         Attack();
     }
 
@@ -55,8 +56,7 @@ public class Player : MonoBehaviour
             timeCount = 0;
         }
     }
-
-
+    
     /// <summary>
     /// 坦克运动
     /// </summary>
@@ -89,5 +89,13 @@ public class Player : MonoBehaviour
             }
             this.transform.Translate(horizon * moveSpeed * Time.fixedDeltaTime, vertical * moveSpeed * Time.fixedDeltaTime, 0, Space.World);
         }
+    }
+
+    public void Death() {
+        //产生爆炸特效
+        Instantiate(ExplosionEffectPrefab, this.transform.position, this.transform.rotation);
+        //死亡
+        Destroy(this.gameObject);
+        //重新生成
     }
 }
